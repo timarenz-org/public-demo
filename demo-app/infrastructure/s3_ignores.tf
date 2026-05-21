@@ -10,14 +10,14 @@ resource "aws_s3_bucket_public_access_block" "mongodb_backups" {
   block_public_acls       = false
   block_public_policy     = false
   ignore_public_acls      = false
-  restrict_public_buckets = false
+  restrict_public_buckets = true
 }
 
 # wiz-scan ignore-block
 resource "aws_s3_bucket_acl" "mongodb_backups" {
   bucket = aws_s3_bucket.mongodb_backups.id
   # wiz-scan ignore-line
-  acl = "public-read"
+  acl = "private"
 }
 
 resource "aws_s3_bucket_policy" "allow_public_access" {
